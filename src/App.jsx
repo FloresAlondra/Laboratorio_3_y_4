@@ -1,16 +1,21 @@
 import './App.css';
-import { useRef, useState } from 'react';
-import Home from './Components/Home';
-import AnonymousUserComponents from './Components/AnonymousUserComponents';
+import { useContext, useRef, useState } from 'react';
+import Home from '../src/Components/Home';
+import { AuthContext } from './Context/AuthContext';
 
 function App() {
   const emailRef = useRef();
-  const passwordRef = useRef();
+  const passwordRef = useRef('');
+
   const [error, setError] = useState('');
-  const [user, setUser] = useState(null);
+
+  const {user, setUser} = useContext(AuthContext)
 
   const login = (email, password) => {
-    return email === 'admin' && password === '1234';
+    if( email === 'admin' && password === '1234') {
+      return true;
+    }
+    return false;
   };
 
   const handleLogin = () => {
@@ -28,7 +33,9 @@ function App() {
   return (
     <>
       <h2>Login</h2>
-      {!user ? (
+      {
+      
+      !user ? (
         <div>
 
           <input 
@@ -49,7 +56,7 @@ function App() {
           {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>) : 
       (
-        <Home email={user.email} />
+        <Home  />
       )}
     </>
   );

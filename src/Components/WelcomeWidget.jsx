@@ -1,7 +1,7 @@
-export default function WelcomeWidget({ email }) {
+export default function WelcomeWidget({ userName }) {
     return (
       <div>
-        <h1>Welcome to our site {email}</h1>
+        <h1>Welcome {userName}</h1>
       </div>
     );
 }
